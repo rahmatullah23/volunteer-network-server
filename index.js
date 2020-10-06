@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const port = 4007
-app.get('/', (req, res) =>{
-  res.send('working')
-})
+// app.get('/', (req, res) =>{
+//   res.send('working')
+// })
 
 const app = express()
 app.use(cors());
@@ -43,17 +43,7 @@ client.connect(err => {
   })
 
 
- app.post('/addBooking', (req, res) => {
-        const newBooking = req.body;
-        bookings.insertOne(newBooking)
-            .then(result => {
-                // console.log(result)
-                res.send(result.insertedCount > 0);
-            })
-        console.log(newBooking);
-    })
-
-      app.get('/bookings', (req, res) => {
+      app.get('/events', (req, res) => {
         console.log(req.headers.authorization)
         const bearer = req.headers.authorization;
         if (bearer && bearer.startsWith('Bearer ')) {
