@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const port = 4007
+app.get('/', (req, res) =>{
+  res.send('working')
+})
 
 const app = express()
 app.use(cors());
@@ -15,25 +18,15 @@ client.connect(err => {
     const bookings = client.db("volunteer").collection("volunteertyp");
     const ordersCollection = client.db("volunteer").collection("orders");
     console.log('connected successfully')
-    //   client.close();
-    app.post('/addvolun', (req, res) => {
-        const newBooking = req.body;
-        bookings.insertOne(newBooking)
-            .then(result => {
-                // console.log(result)
-                res.send(result.insertedCount > 0);
-            })
-        console.log(newBooking);
-    })
-
-    app.get('/products', (req, res) => {
+    
+    app.get('/volunteer', (req, res) => {
     bookings.find({})
     .toArray((err, documents)=>{
       res.send(documents);
     })
   })
 
-    app.post('/addOrder', (req, res) => {
+    app.post('/register', (req, res) => {
         const order = req.body;
         ordersCollection.insertOne(order)
         .then(result => {
